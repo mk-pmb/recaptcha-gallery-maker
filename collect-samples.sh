@@ -19,7 +19,7 @@ function main () {
     API_HTML="$(request_challenge)"
     WGET_PID="$(<<<"$API_HTML" grep -oPe '<!-- wget_pid=[0-9]+ -->' \
       | tail -n 1 | tr -cd 0-9)"
-    SAVE_BFN="${SAVE_STEM}-$WGET_PID"
+    SAVE_BFN="${SAVE_STEM}.$WGET_PID"
     IMG_URL="${SRV_BASE}$(<<<"$API_HTML" grep -oPe 'image\?[^\x22<>]+' \
       | tail -n 1)"
     save_pic &
