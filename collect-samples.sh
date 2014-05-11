@@ -6,6 +6,13 @@ SELFPATH="$(readlink -m "$0"/..)"
 function main () {
   cd "$SELFPATH" || return $?
 
+  local WGET_UA="$(LANG=C wget --version 2>&1 | head -n 1 | sed -nre '
+    s~^.*\b([Ww]get) ([0-9\.]+) built on ([A-Za-z0-9-]+)\b.*$~\1/\2 (\3)~p')"
+  local UA_OS='X11; Linux i686'
+  local OPERA_UA="Opera/9.80 ($UA_OS) Presto/2.12.388 Version/12.16"
+  local FFOX_UA="Mozilla/5.0 ($UA_OS; rv:29.0) Gecko/20100101 Firefox/29.0"
+  WGET_UA="$FFOX_UA"
+
   local SRV_BASE=http://api.recaptcha.net/
   local API_KEY='6LcqXMoSAAAAAKjuyEO6KOORNfLSiSU_ezGdQoBi'  # Hoaxilla-Forum
   local SAVE_FN=
@@ -31,7 +38,7 @@ function main () {
 
 
 function request_challenge () {
-  wget -O - "${SRV_BASE}noscript?k=$API_KEY" &
+  get_saveas "${SRV_BASE}noscript?k=$API_KEY" - &
   local WGET_PID=$!
   wait "$WGET_PID"
   echo "<!-- wget_pid=$WGET_PID -->"
@@ -40,11 +47,18 @@ function request_challenge () {
 
 function save_pic () {
   local PIC_DEST="$SAVE_BFN".jpeg
-  wget -q -O "$PIC_DEST" "$IMG_URL"
+  get_saveas "$IMG_URL" "$PIC_DEST" -q
   local CHALLENGE="$IMG_URL"
   CHALLENGE="${CHALLENGE##*\?}"
   CHALLENGE="${CHALLENGE##*=}"
   echo "<!-- challenge=${CHALLENGE} -->" >>"$PIC_DEST"
+}
+
+
+function get_saveas () {
+  local SRC_URL="$1"; shift
+  local DEST_FN="$1"; shift
+  wget --user-agent="$WGET_UA" "$@" -O "$DEST_FN" "$SRC_URL"
 }
 
 

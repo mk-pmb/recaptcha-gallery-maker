@@ -9,9 +9,9 @@ function main () {
   local TMPL_FN='mkgal.tmpl.html'
   local TMPL_MAXLN=9002
   local ENT_QUOT='"'
-  local IMG_FNS=()
-  readarray -t IMG_FNS < <(ls -1 20*.jpeg | grep -xPe '[0-9-]+\.[0-9-]+\.jpeg')
+  local IMG_FNS=( "$(ls -1 20*.jpeg | grep -xPe '[0-9-]+\.[0-9-]+\.jpeg')" )
   local IMG_GRPS=( $(<<<"$IMG_FNS" cut -d . -sf 1 | sort -u) )
+  readarray -t IMG_FNS <<<"${IMG_FNS[0]}"
   local IMG_GRP=
   local GRP_FN=
   local GRP_IMGS=
