@@ -9,6 +9,7 @@ function main () {
   local WGET_UA="$(LANG=C wget --version 2>&1 | head -n 1 | sed -nre '
     s~^.*\b([Ww]get) ([0-9\.]+) built on ([A-Za-z0-9-]+)\b.*$~\1/\2 (\3)~p')"
   local UA_OS='X11; Linux i686'
+  UA_OS='Windows NT 6.1; WOW64'
   local OPERA_UA="Opera/9.80 ($UA_OS) Presto/2.12.388 Version/12.16"
   local FFOX_UA="Mozilla/5.0 ($UA_OS; rv:29.0) Gecko/20100101 Firefox/29.0"
   WGET_UA="$FFOX_UA"
@@ -22,7 +23,7 @@ function main () {
   local IMG_NUM=
   local WGET_PID=
   local SAVE_STEM="$(date +%Y-%m%d-%H%M)"
-  for IMG_NUM in {1..020}; do
+  for IMG_NUM in {1..${IMGCNT:-60}}; do
     API_HTML="$(request_challenge)"
     WGET_PID="$(<<<"$API_HTML" grep -oPe '<!-- wget_pid=[0-9]+ -->' \
       | tail -n 1 | tr -cd 0-9)"
