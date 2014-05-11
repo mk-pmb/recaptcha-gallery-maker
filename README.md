@@ -24,6 +24,19 @@ Features
 * ![☐][ck-no] compile collected images into one single image file
 
 
+Who else has those problems?
+----------------------------
+* [SX Meta: reCAPTCHA too difficult for humans](http://meta.stackexchange.com/questions/75965/)
+  * [I am not a robot!](http://meta.stackexchange.com/questions/143455/)
+  * [even with >500 reputation](http://meta.stackexchange.com/questions/81012/)
+* [TOR Bridge Team](https://www.mail-archive.com/tor-bugs@lists.torproject.org/msg50058.html)
+* [People on Google Groups](https://groups.google.com/forum/?_escaped_fragment_=topic/recaptcha/tZsgGPZ6l00)
+* [dotTech's archaeologists](http://dottech.org/109832/the-impossible-recaptcha-comic/) ;-)
+* [League of Legends forums users](http://forums.na.leagueoflegends.com/board/showthread.php?t=4144967)
+* [People on BuzzFeed](http://www.buzzfeed.com/charliewarzel/meet-crapcha-the-impossible-captcha)
+* [Audio version testers](http://www.90percentofeverything.com/2012/09/05/another-reason-not-to-use-recaptcha/)
+
+
 License
 -------
 [MIT](LICENSE.MIT.md)
