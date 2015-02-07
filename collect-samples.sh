@@ -23,7 +23,7 @@ function main () {
   local IMG_NUM=
   local WGET_PID=
   local SAVE_STEM="$(date +%Y-%m%d-%H%M)"
-  for IMG_NUM in {1..${IMGCNT:-60}}; do
+  for IMG_NUM in $(seq 1 ${IMGCNT:-60}); do
     API_HTML="$(request_challenge)"
     WGET_PID="$(<<<"$API_HTML" grep -oPe '<!-- wget_pid=[0-9]+ -->' \
       | tail -n 1 | tr -cd 0-9)"
